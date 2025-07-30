@@ -4,7 +4,7 @@
 # The Path to "tmux.sh" is dynamic.
 #
 # When OUTSIDE tmux:
-#  "tmux" checks for existing session named 'my_session'
+#  "tmux" checks for existing session named 'cmdrFRANKLYsSession'
 #  If it doesn't exist, it will create and attach to it
 #
 # When INSIDE tmux:
@@ -15,10 +15,10 @@
 
 if [ -z "$TMUX" ]; then
     tmux() {
-        if ! command tmux has-session -t my_session 2>/dev/null; then
+        if ! command tmux has-session -t cmdrFRANKLYsSession 2>/dev/null; then
             /PATH/TO/TMUX.SH
         fi
-        exec command tmux attach -t my_session
+        exec command tmux attach -t cmdrFRANKLYsSession
     }
 else
     if [[ $- == *i* ]]; then
