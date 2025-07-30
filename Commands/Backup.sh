@@ -1,15 +1,15 @@
 #!/bin/bash
 # -----------------------------------------------------------------------------
-# Backup Helper with some cool options:
+# Backup Helper with options:
 #  -p, -path         Set and save default output path for session (must be a directory)
-#  -r, -relative     Use relative path inside backup dir
+#  -r, -relative     Use relative path inside backup dir (starts with hostname)
 #  -n, -new          New copy (timestamped if exists)
 #  -o, -overwrite    Overwrite without confirmation
 #  -d, -debug        Debug mode (show commands, no copy)
 #  -x, -reset        Reset default path to /home/<user>/Backups
 #  -h, -help         Show this help summary
-#  -github, -link,
-#  -url, -web        Open https://github.com/cmdrFRANKLY1 in default browser
+#
+#  -github, -link, -url, -web         to open https://github.com/cmdrFRANKLY1 
 # -----------------------------------------------------------------------------
 
 CONFIG_FILE="$HOME/.config/backup.conf"
@@ -35,14 +35,14 @@ Usage: backup [options] <source>
 
 Options:
   -p, -path <dir>      Set and save default backup directory (must be a directory)
-  -r, -relative        Use relative path inside backup directory
+  -r, -relative        Use relative path inside backup directory (prepends hostname)
   -n, -new             Create new timestamped copy if destination exists
   -o, -overwrite       Overwrite existing backup without confirmation
   -d, -debug           Show commands without performing backup
   -x, -reset           Reset default backup directory to ~/Backups
   -h, -help            Show this help summary and exit
-  -github, -link,
-  -url, -web           Open https://github.com/cmdrFRANKLY1 in default browser
+  
+  -github, -link, -url, -web          Open https://github.com/cmdrFRANKLY1 
 EOF
 }
 
@@ -155,7 +155,9 @@ backup() {
   if $RELATIVE; then
     local REL_PATH
     REL_PATH=$(realpath --relative-to="/" -- "$ABS_SOURCE")
-    DEST="$SESSION_BACKUP_DIR/$REL_PATH"
+    local HOSTNAME
+    HOSTNAME=$(hostname)
+    DEST="$SESSION_BACKUP_DIR/$HOSTNAME/$REL_PATH"
   else
     DEST="$SESSION_BACKUP_DIR/$BASENAME"
   fi
