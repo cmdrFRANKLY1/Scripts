@@ -1,7 +1,7 @@
 # ~/home/<USER>/.profile
 #
 # This script manages my tmux sessions. 
-# The Path to "tmux.sh" is dynamic.
+# The Path to "tmux*.sh" is dynamic.
 #
 # When OUTSIDE tmux:
 #  "tmux" checks for existing session named 'cmdrFRANKLYsSession'
